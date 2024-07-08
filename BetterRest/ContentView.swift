@@ -26,19 +26,25 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
-                Text("When do you want to wake up?")
-                    .font(.headline)
-                DatePicker("Select your hour", selection: $wakeupTime, displayedComponents: .hourAndMinute)
-                    .labelsHidden()
+            Form {
+                VStack(alignment: .leading, spacing: 0) {
+                    Text("When do you want to wake up?")
+                        .font(.headline)
+                    DatePicker("Select your hour", selection: $wakeupTime, displayedComponents: .hourAndMinute)
+                        .labelsHidden()
+                }
                 
-                Text("Desired amount of sleep?")
-                    .font(.headline)
-                Stepper("\(sleepAmount.formatted()) hours", value: $sleepAmount, in: 3...12, step: 0.25)
+                VStack(alignment: .leading, spacing: 0) {
+                    Text("Desired amount of sleep?")
+                        .font(.headline)
+                    Stepper("\(sleepAmount.formatted()) hours", value: $sleepAmount, in: 3...12, step: 0.25)
+                }
                 
-                Text("Daily coffee intake")
-                    .font(.headline)
-                Stepper("\(coffeeIntake) cup(s)", value: $coffeeIntake, in: 1...20, step: 1)
+                VStack(alignment: .leading, spacing: 0) {
+                    Text("Daily coffee intake")
+                        .font(.headline)
+                    Stepper("^[\(coffeeIntake) cup](inflect: true)", value: $coffeeIntake, in: 1...20, step: 1)
+                }
             }
             .navigationTitle("BetterRest")
             .toolbar {
